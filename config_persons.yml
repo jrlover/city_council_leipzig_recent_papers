@@ -1,0 +1,5 @@
+body: leipzig
+base_uri: https://ratsinfo.leipzig.de/bi
+persons_path: pa021.asp?
+persons_limit: 100
+

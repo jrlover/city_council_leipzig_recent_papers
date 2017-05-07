@@ -12,5 +12,6 @@ ADD . $app
 
 RUN bundle install
 
-ENTRYPOINT bundle exec ruby scraper.rb
-CMD ["https://ratsinfo.leipzig.de/bi/vo020.asp?VOLFDNR=1003952"]
+ENTRYPOINT bundle exec ruby 
+CMD ["scraper.rb", "https://ratsinfo.leipzig.de/bi/vo020.asp?VOLFDNR=1003952"]
+#CMD ["scraper_persons.rb", "https://ratsinfo.leipzig.de/bi/pa021.asp"]
