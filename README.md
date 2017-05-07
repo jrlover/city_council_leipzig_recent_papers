@@ -1,9 +1,15 @@
+Scraper for https://ratsinfo.leipzig.de/
+
+The scraped data is eventually displayed by [stadtratmonitor.leipzig.codefor.de](https://stadtratmonitor.leipzig.codefor.de/)
+which is developed [here](https://github.com/CodeforLeipzig/stadtratmonitor).
+
 This is a scraper that runs on [Morph](https://morph.io/jrlover/city_council_leipzig_recent_papers). 
-To get started [see the documentation](https://morph.io/documentation).
+To get started, see the [documentation](https://morph.io/documentation).
 
 Install docker:
 `curl -fsSL https://get.docker.com/ | sh`
-(If you encounter any troubles, follow the installation guide at [the official Docker site](https://docs.docker.com/engine/installation/)).
+
+If you encounter any troubles, follow the installation guide at [the official Docker site](https://docs.docker.com/engine/installation/).
 
 Build docker image:
 `docker build -t leipzig_scraper .`
