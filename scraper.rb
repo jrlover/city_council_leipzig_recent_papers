@@ -28,6 +28,11 @@ class Pages  < Struct.new(:uri)
 
     uri = "#{Scraper.expand_uri(Scraper.config['recent_papers_path'])}"
     client = HTTPClient.new
+    client.ssl_config.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    client.receive_timeout=500
+    if HTTPClient.respond_to?("client.transparent_gzip_decompression=")
+      client.transparent_gzip_decompression = true
+    end
     res = client.get uri
     cookie = res.header["Set-Cookie"].first.split(';').first.split('=')
 
