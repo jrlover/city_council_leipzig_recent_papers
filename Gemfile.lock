@@ -34,3 +34,9 @@ DEPENDENCIES
   html_to_plain_text
   nokogiri
   scraperwiki
+
+RUBY VERSION
+   ruby 2.2.8p477
+
+BUNDLED WITH
+   1.16.0

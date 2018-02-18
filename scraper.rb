@@ -17,9 +17,38 @@ module Scraper
   def expand_uri(path)
     "#{config['base_uri']}/#{path}"
   end
+
+  def maxElemsPerPage
+    config['element_per_page_limit']
+  end
 end
 
-class Page < Struct.new(:uri)
+class Pages  < Struct.new(:uri)
+  def scrapedPapers
+
+    uri = "#{Scraper.expand_uri(Scraper.config['recent_papers_path'])}"
+    client = HTTPClient.new
+    res = client.get uri
+    cookie = res.header["Set-Cookie"].first.split(';').first.split('=')
+
+    $i = 0
+    $num = Scraper.config['recent_papers_limit']
+    papers = Array.new
+    
+    $showNextStr = "#{Scraper.config['next']}"
+
+    while $i < $num  do
+      shownext = ($i > 0) ? $showNextStr : ""
+      index = PaperIndex.new("#{uri}#{shownext}", cookie)
+      papers.concat index.papers
+      $i += Scraper.maxElemsPerPage
+    end  
+
+    return papers
+  end
+end
+
+class Page < Struct.new(:uri, :cookies)
   def doc
     @doc ||= begin
       puts "Load #{self.class} from #{uri}"
@@ -39,6 +68,14 @@ class Page < Struct.new(:uri)
       client.transparent_gzip_decompression = true
     end
 
+    if !cookies.nil?
+      cookie = WebAgent::Cookie.new
+      cookie.name = cookies.first
+      cookie.value = cookies.last
+      cookie.url = URI.parse(url)
+      client.cookie_manager.add(cookie)
+    end  
+
     if params.nil?
       html = client.get_content(url)
     else
@@ -57,12 +94,10 @@ class Page < Struct.new(:uri)
 
 end
 
-
-
 class PaperIndex < Page
   def papers
     rows = doc.css('table.tl1 tbody tr')
-    rows = rows.take(Scraper.config['recent_papers_limit'])
+    rows = rows.take((rows.size < Scraper.maxElemsPerPage) ? rows.size : Scraper.maxElemsPerPage)
     rows.map! do |row|
       parse_row_to_paper(row)
     end
@@ -193,8 +228,8 @@ end
 
 ScraperWiki.config = { db: 'data.sqlite' }
 
-index = PaperIndex.new(Scraper.expand_uri(Scraper.config['recent_papers_path']))
-index.papers.each do |paper|
+pages = Pages.new(Scraper.expand_uri(Scraper.config['recent_papers_path']))
+pages.scrapedPapers.each do |paper|
   paper.attributes
   ScraperWiki.save_sqlite([:id], paper.attributes, 'data')
 end
