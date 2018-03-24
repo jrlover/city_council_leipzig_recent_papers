@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.8'
+ruby '2.5.0'
 
 gem 'scraperwiki'
 gem 'nokogiri'
