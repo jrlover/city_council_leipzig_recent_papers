@@ -6,6 +6,7 @@ require 'html_to_plain_text'
 require 'active_support/core_ext/string'
 require 'httpclient'
 require 'json'
+require 'sqlite3'
 
 module Scraper
   module_function
@@ -232,6 +233,7 @@ class Paper < Page
 end
 
 ScraperWiki.config = { db: 'data.sqlite' }
+SQLite3::Database.open 'data.sqlite'
 
 pages = Pages.new(Scraper.expand_uri(Scraper.config['recent_papers_path']))
 pages.scrapedPapers.each do |paper|
