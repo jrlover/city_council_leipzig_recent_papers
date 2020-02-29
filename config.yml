@@ -1,6 +1,6 @@
 body: leipzig
 base_uri: https://ratsinfo.leipzig.de/bi
 recent_papers_path: vo040.asp?
-recent_papers_limit: 300
-element_per_page_limit: 50
+recent_papers_limit: 1
+element_per_page_limit: 1
 next: shownext=true
