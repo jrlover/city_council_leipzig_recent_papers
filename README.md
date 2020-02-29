@@ -24,7 +24,7 @@ Related projects:
   [here](https://github.com/offenesdresden/dresden-ratsinfo), used by [democropticon](https://github.com/astro/democropticon) to 
   visualize it [here](https://ratskarte.offenesdresden.de/)
 * [scraper](https://github.com/okfde/politik-bei-uns-scraper) used by [Politik bei uns](https://politik-bei-uns.de/)
-* [scraper](https://github.com/codeformunich/Muenchen-Transparent) used by [München Transparent](https://www.muenchen-transparent.de/)
-* [Offener Rat Münster](https://github.com/codeformuenster/offenerrat-ms)
+* [scraper](https://github.com/codeformunich/Muenchen-Transparent) used by [MÃ¼nchen Transparent](https://www.muenchen-transparent.de/)
+* [Offener Rat MÃ¼nster](https://github.com/codeformuenster/offenerrat-ms)
 * [Old Leipzig ERIS scraper](https://github.com/CodeforLeipzig/eris-scraper)
 * [OParl Specification](https://oparl.org/spezifikation/online-ansicht/)
