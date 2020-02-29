@@ -10,6 +10,7 @@ ENV BUNDLE_PATH /box
 
 ADD . $app
 
+RUN bundle update --all
 RUN bundle install
 
 ENTRYPOINT bundle exec ruby 
